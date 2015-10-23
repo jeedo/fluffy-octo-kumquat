@@ -1,0 +1,463 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Outages API",
+    "description": "Move your app forward with the Outages API",
+    "version": "1.0.0"
+  },
+  "produces": ["application/json"],
+  "host": "localhost:8080",
+  "basePath": "/v1",
+  "paths": {
+  
+  "/outages/avc": {
+    
+    "get": {
+      "summary": "Outages based on Access Virtual Circuit address",
+      "description":"The Outages by AVC address end point provides information on current and completed planned and unplanned service interruptions affecting that AVC address",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "outagesAvcGet",
+      "parameters": [
+        {
+  "name" : "avc",
+  "in" : "query",
+  "description" : "AVC to search by.",
+  "required" : true,
+  "type" : "string",
+  "format" : "AVC Id"
+},
+        {
+  "name" : "content_type",
+  "in" : "query",
+  "description" : "Header to return",
+  "required" : true,
+  "type" : "string",
+  "format" : "application/json or text/json"
+},
+        {
+  "name" : "callback",
+  "in" : "query",
+  "description" : "Optional wrapper for JSONP",
+  "required" : false,
+  "type" : "string",
+  "format" : "JSON_CALLBACK"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "An Outage object containing events",
+  "schema" : {
+    "$ref" : "#/definitions/Outage"
+  }
+}
+        ,
+        "400": {
+  "description" : "Failure"
+}
+        ,
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/outages/mac": {
+    
+    "get": {
+      "summary": "Outages based on MAC address",
+      "description":"The Outages by MAC address end point provides information on current and completed planned and unplanned service interruptions affecting that MAC address",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "outagesMacGet",
+      "parameters": [
+        {
+  "name" : "mac",
+  "in" : "query",
+  "description" : "Full National Number to search by.",
+  "required" : true,
+  "type" : "string",
+  "format" : "MAC Address"
+},
+        {
+  "name" : "content_type",
+  "in" : "query",
+  "description" : "Header to return",
+  "required" : true,
+  "type" : "string",
+  "format" : "application/json or text/json"
+},
+        {
+  "name" : "callback",
+  "in" : "query",
+  "description" : "Optional wrapper for JSONP",
+  "required" : false,
+  "type" : "string",
+  "format" : "JSON_CALLBACK"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "An Outage object containing events",
+  "schema" : {
+    "$ref" : "#/definitions/Outage"
+  }
+}
+        ,
+        "400": {
+  "description" : "Failure"
+}
+        ,
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/outages/street_address": {
+    
+    "get": {
+      "summary": "Outages based on a geographic location",
+      "description":"The Outages by geographic location end point provides information on current and completed planned and unplanned service interruptions affecting that location",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "outagesStreetAddressGet",
+      "parameters": [
+        {
+  "name" : "content_type",
+  "in" : "query",
+  "description" : "Header to return",
+  "required" : true,
+  "type" : "string",
+  "format" : "application/json or text/json"
+},
+        {
+  "name" : "number",
+  "in" : "query",
+  "description" : "Address Street number.",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "street",
+  "in" : "query",
+  "description" : "Street name (required if number provided)",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "locality",
+  "in" : "query",
+  "description" : "Suburb or Town.",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "state",
+  "in" : "query",
+  "description" : "State.",
+  "required" : false,
+  "type" : "string",
+  "enum" : [ "QLD", "NSW", "ACT", "VIC", "TAS", "SA", "WA", "NAT", "INT", "OT" ]
+},
+        {
+  "name" : "lat",
+  "in" : "query",
+  "description" : "Latitude.",
+  "required" : false,
+  "type" : "number",
+  "format" : "long"
+},
+        {
+  "name" : "lpm",
+  "in" : "query",
+  "description" : "Longitude.",
+  "required" : false,
+  "type" : "number",
+  "format" : "long"
+},
+        {
+  "name" : "callback",
+  "in" : "query",
+  "description" : "Optional wrapper for JSONP",
+  "required" : false,
+  "type" : "string",
+  "format" : "JSON_CALLBACK"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "An Outage object containing events",
+  "schema" : {
+    "$ref" : "#/definitions/Outage"
+  }
+}
+        ,
+        "400": {
+  "description" : "Failure"
+}
+        ,
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/outages/fnn": {
+    
+    "get": {
+      "summary": "Outages based on FNN",
+      "description":"The Outages by FNN end point provides information on current and completed planned and unplanned service interruptions affecting that Full National Number",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "outagesFnnGet",
+      "parameters": [
+        {
+  "name" : "fnn",
+  "in" : "query",
+  "description" : "Full National Number to search by.",
+  "required" : true,
+  "type" : "string",
+  "pattern" : "0\\d{9}",
+  "format" : "0nnnnnnnnn"
+},
+        {
+  "name" : "content_type",
+  "in" : "query",
+  "description" : "Header to return",
+  "required" : true,
+  "type" : "string",
+  "format" : "application/json or text/json"
+},
+        {
+  "name" : "callback",
+  "in" : "query",
+  "description" : "Optional wrapper for JSONP",
+  "required" : false,
+  "type" : "string",
+  "format" : "JSON_CALLBACK"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "An Outage object containing event informaiton",
+  "schema" : {
+    "$ref" : "#/definitions/Outage"
+  }
+}
+        ,
+        "400": {
+  "description" : "Failure"
+}
+        ,
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/outages/wifi": {
+    
+    "get": {
+      "summary": "Outages based on wifi point id",
+      "description":"The Outages by WiFi address end point provides information on current and completed planned and unplanned service interruptions affecting that WiFi Access Point",
+      "x-swagger-router-controller": "Default",
+      "tags": ["Default"],
+      "operationId": "outagesWifiGet",
+      "parameters": [
+        {
+  "name" : "wifi",
+  "in" : "query",
+  "description" : "WiFi ID to search by.",
+  "required" : true,
+  "type" : "string",
+  "format" : "0\\d{7}X\\d"
+},
+        {
+  "name" : "content_type",
+  "in" : "query",
+  "description" : "Header to return",
+  "required" : true,
+  "type" : "string",
+  "format" : "application/json or text/json"
+},
+        {
+  "name" : "callback",
+  "in" : "query",
+  "description" : "Optional wrapper for JSONP",
+  "required" : false,
+  "type" : "string",
+  "format" : "JSON_CALLBACK"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "An Outage object containing events",
+  "schema" : {
+    "$ref" : "#/definitions/Outage"
+  }
+}
+        ,
+        "400": {
+  "description" : "Failure"
+}
+        ,
+        "default": {
+  "description" : "Unexpected error",
+  "schema" : {
+    "$ref" : "#/definitions/Error"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } 
+  
+  }, "definitions": {
+  "Outage": {
+  "type" : "object",
+  "properties" : {
+    "last_updated" : {
+      "type" : "string",
+      "format" : "date"
+    },
+    "technologies" : {
+      "type" : "string"
+    },
+    "location" : {
+      "type" : "string"
+    },
+    "state" : {
+      "type" : "string",
+      "enum" : [ "QLD", "NSW", "ACT", "VIC", "TAS", "SA", "WA", "NAT", "INT", "OT" ]
+    },
+    "fnn" : {
+      "type" : "string"
+    },
+    "mac" : {
+      "type" : "string"
+    },
+    "near_future" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Event"
+      }
+    },
+    "far_future" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Event"
+      }
+    },
+    "past" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Event"
+      }
+    },
+    "current" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/definitions/Event"
+      }
+    }
+  }
+},"Event": {
+  "type" : "object",
+  "properties" : {
+    "customer_type" : {
+      "type" : "string"
+    },
+    "is_planned" : {
+      "type" : "boolean"
+    },
+    "duration_description" : {
+      "type" : "string"
+    },
+    "fnn" : {
+      "type" : "string"
+    },
+    "rating" : {
+      "type" : "string",
+      "format" : "Risk1,Risk2,Risk3,Risk4,Risk5"
+    },
+    "state" : {
+      "type" : "string"
+    },
+    "id" : {
+      "type" : "string"
+    },
+    "etr_timestamp" : {
+      "type" : "string"
+    },
+    "source_id" : {
+      "type" : "string"
+    },
+    "location" : {
+      "type" : "string"
+    },
+    "duration" : {
+      "type" : "string"
+    },
+    "description" : {
+      "type" : "string"
+    },
+    "filename" : {
+      "type" : "string"
+    },
+    "technology" : {
+      "type" : "string"
+    }
+  }
+},"Error": {
+  "type" : "object",
+  "properties" : {
+    "code" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "message" : {
+      "type" : "string"
+    },
+    "fields" : {
+      "type" : "string"
+    }
+  }
+}
+  }
+}
